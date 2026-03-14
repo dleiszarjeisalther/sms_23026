@@ -109,7 +109,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     <p style='margin: 0 0 10px 0;'><strong>Student ID / User ID:</strong> {$newStudentId}</p>
                                     <p style='margin: 0;'><strong>Password:</strong> {$rawPassword}</p>
                                 </div>
-                                <p>You can use these credentials to access the <a href='http://localhost" . BASE_URL . "/login'>Student Portal</a>.</p>
+                                <p>You can use these credentials to access the <a href='" . APP_URL . "/login'>Student Portal</a>.</p>
                                 <p style='color: #777; font-size: 0.9em; margin-top: 30px;'>Do not share this email with anyone.</p>
                             </div>
                         ";

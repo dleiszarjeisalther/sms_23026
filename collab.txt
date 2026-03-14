@@ -1,0 +1,80 @@
+# SIMS PROJECT COLLABORATION GUIDE
+
+Welcome, Collaborator! To ensure that adding your subsystem doesn't break others, please follow these guidelines.
+
+## 1. GETTING STARTED
+
+### Setup Commands:
+1. **Clone the Project**:
+   Open your terminal/CMD in your web directory (e.g., `C:/xampp/htdocs`) and run:
+   ```cmd
+   git clone https://github.com/dleiszarjeisalther/sms_23026.git sms_23026-1
+   ```
+2. **Database Setup**:
+   - Create a database named `sms_db` in phpMyAdmin.
+   - Run the migration script via command line:
+     ```cmd
+     php migrate.php
+     ```
+
+## 2. PROJECT STRUCTURE
+
+To keep things organized, place your files in these specific folders:
+
+- **Logic/Process**: `controllers/subsystemX/`
+- **UI/Pages**: `views/subsystemX/`
+- **Navigation Links**: `views/navigation/subsystemX_navigation.php`
+
+## 3. HOW TO ADD YOUR SUBSYSTEM
+
+### Step 1: Create your Navigation File
+Create `views/navigation/subsystemX_navigation.php`. 
+Use the `nav-link` class and the `isActive()` function for highlighting.
+Always use `<?= BASE_URL ?>` for links.
+
+Example:
+```php
+<a href="<?= BASE_URL ?>/my_feature" class="nav-link <?= isActive('my_feature', $currentRoute) ?>">
+    <span class="nav-text">My Feature</span>
+</a>
+```
+
+### Step 2: Register in Sidebar
+Open `views/navigation_bar.php` and include your navigation file inside the appropriate section (Student or Registrar).
+```php
+include __DIR__ . '/navigation/subsystemX_navigation.php';
+```
+
+### Step 3: Register your Route
+Open `index.php` and add a `case` for your feature in the `switch ($request)` block.
+```php
+case 'my_feature':
+    require __DIR__ . '/controllers/subsystemX/my_feature.controller.php';
+    break;
+```
+### Step 4: Handle Database Changes (If any)
+If your subsystem needs new tables or columns:
+1. Update `sms_db.sql` (the base schema).
+2. Update `migrate.php` (for existing installations).
+   - Use `try-catch` and `IF NOT EXISTS` to prevent errors for others who already have the columns.
+
+### Step 5: Commit and Push
+Ensure you push your changes to the main branch so others can see your subsystem.
+```cmd
+git add .
+git commit -m "Added Subsystem X"
+git push origin main
+```
+
+## 4. CRITICAL CODING RULES
+
+1. **NEVER Hardcode Paths**: 
+   - Always use `<?= BASE_URL ?>` for CSS, JS, and link HREF.
+   - Example: `<link rel="stylesheet" href="<?= BASE_URL ?>/resources/css/style.css">`
+2. **PHP Redirects**:
+   - Always use `header('Location: ' . BASE_URL . '/your_route');`
+3. **Database**: 
+   - You MUST update both `sms_db.sql` AND `migrate.php` for any schema changes.
+4. **Sessions**: 
+   - Use `$_SESSION['user_type']` (either 'student' or 'registrar') to restrict access as needed.
+

@@ -8,6 +8,12 @@ if (!defined('BASE_URL')) {
     define('BASE_URL', '/' . ltrim($baseUrl, '/'));
 }
 
+if (!defined('APP_URL')) {
+    $protocol = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') ? "https" : "http";
+    $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
+    define('APP_URL', $protocol . "://" . $host . BASE_URL);
+}
+
 // Database configuration
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
