@@ -111,6 +111,15 @@ function isActive($route, $currentRoute)
                 include __DIR__ . '/navigation/subsystem10_navigation.php';
             ?>
 
+            <a href="<?= BASE_URL ?>/security_management" class="nav-link <?= isActive('security_management', $currentRoute) ?>">
+                <span class="nav-icon">
+                    <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    </svg>
+                </span>
+                <span class="nav-text">Security</span>
+            </a>
+
             <a href="<?= BASE_URL ?>/logout" class="nav-link <?= isActive('logout', $currentRoute) ?>">
                 <span class="nav-icon">
                     <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">

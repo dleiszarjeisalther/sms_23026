@@ -171,6 +171,18 @@ switch ($request) {
         require __DIR__ . '/views/subsystem1/id_generator.php';
         break;
 
+    case 'otp_verify':
+        require __DIR__ . '/views/otp_verify.php';
+        break;
+
+    case 'security_management':
+        if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'registrar') {
+            header('Location: ' . BASE_URL . '/login');
+            exit;
+        }
+        require __DIR__ . '/views/subsystem1/security_management.php';
+        break;
+
     case 'my_id':
         // Student ID card view
         if (!isset($_SESSION['user_id']) || $_SESSION['user_type'] !== 'student') {

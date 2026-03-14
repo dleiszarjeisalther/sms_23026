@@ -20,6 +20,10 @@ CREATE TABLE IF NOT EXISTS `students` (
   `section` varchar(50) DEFAULT NULL,
   `profile_image` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
+  `login_attempts` int(11) DEFAULT 0,
+  `is_locked` tinyint(1) DEFAULT 0,
+  `otp_code` varchar(10) DEFAULT NULL,
+  `otp_expiry` datetime DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

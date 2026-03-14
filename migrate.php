@@ -54,6 +54,34 @@ try {
     echo "Section column may exist: " . $e->getMessage() . "\n";
 }
 
+try {
+    $pdo->exec("ALTER TABLE students ADD COLUMN IF NOT EXISTS login_attempts INT DEFAULT 0");
+    echo "Added login_attempts column.\n";
+} catch (PDOException $e) {
+    echo "Error adding login_attempts: " . $e->getMessage() . "\n";
+}
+
+try {
+    $pdo->exec("ALTER TABLE students ADD COLUMN IF NOT EXISTS is_locked TINYINT(1) DEFAULT 0");
+    echo "Added is_locked column.\n";
+} catch (PDOException $e) {
+    echo "Error adding is_locked: " . $e->getMessage() . "\n";
+}
+
+try {
+    $pdo->exec("ALTER TABLE students ADD COLUMN IF NOT EXISTS otp_code VARCHAR(10) DEFAULT NULL");
+    echo "Added otp_code column.\n";
+} catch (PDOException $e) {
+    echo "Error adding otp_code: " . $e->getMessage() . "\n";
+}
+
+try {
+    $pdo->exec("ALTER TABLE students ADD COLUMN IF NOT EXISTS otp_expiry DATETIME DEFAULT NULL");
+    echo "Added otp_expiry column.\n";
+} catch (PDOException $e) {
+    echo "Error adding otp_expiry: " . $e->getMessage() . "\n";
+}
+
 // Bulk Seeder for Students
 try {
     $stmt = $pdo->query("SELECT COUNT(*) FROM students");

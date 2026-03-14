@@ -104,10 +104,14 @@
 
                         if (status.trim() === 'success') {
                             showToast('Login successful! Redirecting...', 'success');
-                            // Redirect to the provided path (e.g. dashboard)
                             setTimeout(() => {
                                 window.location.href = responseData;
                             }, 500);
+                        } else if (status.trim() === 'success_otp') {
+                            showToast(parts[2] || 'OTP sent! Please verify.', 'success');
+                            setTimeout(() => {
+                                window.location.href = responseData;
+                            }, 1000);
                         } else {
                             showToast(responseData, 'error');
                             btnLogin.disabled = false;
