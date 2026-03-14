@@ -1,3 +1,7 @@
+REGISTRAR CREDENTIAL
+admin
+admin123
+
 # SIMS PROJECT COLLABORATION GUIDE
 
 Welcome, Collaborator! To ensure that adding your subsystem doesn't break others, please follow these guidelines.
