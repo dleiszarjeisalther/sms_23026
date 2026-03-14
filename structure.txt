@@ -1,0 +1,63 @@
+# Directory Structure
+
+```text
+controllers/                # Handles application logic and processes user requests
+    subsystem1/             # Controllers specific to Subsystem 1
+    subsystem2/             # Controllers specific to Subsystem 2
+
+models/                     # Manages data and database interactions
+    subsystem1/             # Data models (Database Class) for Subsystem 1
+    subsystem2/             # Data models (Database Class) for Subsystem 2
+
+resources/                  # Contains static assets like CSS, JS, and images
+    css/                    # Stylesheets
+        index.css
+    js/                     # JavaScript files
+        index.js
+
+views/                      # Handles the presentation layer (HTML/PHP templates)
+    subsystem1/             # Views specific to Subsystem 1
+    subsystem2/             # Views specific to Subsystem 2
+    navigation/             # Modular navigation components for each subsystem
+        subsystem1_navigation.php
+        subsystem2_navigation.php
+        ...
+        subsystem10_navigation.php
+    navigation_bar.php      # Main navigation bar (includes modular navigation)
+    login.php               # Universal login page
+
+index.php                   # Main entry point and central router
+```
+
+---
+
+# Integration Guide
+
+To integrate a new subsystem (e.g., `subsystem3`) into this architecture, follow these steps:
+
+### 1. Create Directory Structure
+Maintain consistency by creating corresponding folders in each layer:
+*   `controllers/subsystem3/`: For your logic and request handling.
+*   `models/subsystem3/`: For database interaction classes.
+*   `views/subsystem3/`: For your HTML/PHP presentation files.
+
+### 2. Register Routes in `index.php`
+The root `index.php` acts as the central router. You must add your subsystem's entry points to the `switch ($request)` block.
+
+**Example:**
+```php
+case 'subsystem3_feature':
+    // Optional: Add authentication or role check
+    if (!isset($_SESSION['user_id'])) {
+        header('Location: /subsystem1/login');
+        exit;
+    }
+    // Require the controller or view for this feature
+    require __DIR__ . '/controllers/subsystem3/feature.controller.php';
+    break;
+```
+
+### 3. Component Development Guidelines
+*   **Models:** Files in `models/` should strictly handle database queries and data manipulation. Use the naming convention `[name].model.php`.
+*   **Controllers:** Files in `controllers/` should process input, interact with models, and prepare data for the view. Use `[name].controller.php`.
+*   **Views:** Files in `views/` should contain the HTML structure. Use PHP only for echo-ing data and basic loops.
